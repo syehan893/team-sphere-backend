@@ -57,7 +57,7 @@ export class LeaveRepository {
       console.error("Error updating leave request:", error.message || error);
       return null;
     }
-    return data;
+    return data as Leave;
   }
 
   async deleteLeave(requestId: number): Promise<boolean> {

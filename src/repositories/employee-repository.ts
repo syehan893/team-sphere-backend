@@ -54,7 +54,7 @@ export class EmployeeRepository {
       console.error("Error updating employee:", error.message || error);
       return null;
     }
-    return data;
+    return data as Employee;
   }
 
   async deleteEmployee(employeeId: string): Promise<boolean> {

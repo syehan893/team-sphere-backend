@@ -57,7 +57,7 @@ export class TaskRepository {
       console.error("Error updating employee task:", error.message || error);
       return null;
     }
-    return data;
+    return data as Task;
   }
 
   async deleteTask(taskId: number): Promise<boolean> {

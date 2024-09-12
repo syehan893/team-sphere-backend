@@ -30,7 +30,7 @@ export class UserRepository {
       console.error('Error updating user:', error.message || error);
       return null;
     }
-    return data;
+    return data as User;
   }
 
   async deleteUser(userId: string): Promise<boolean> {

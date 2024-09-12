@@ -72,7 +72,7 @@ export class EmployeeRollCallRepository {
       );
       return null;
     }
-    return data;
+    return data as EmployeeRollCall;
   }
 
   async deleteEmployeeRollCall(rollCallId: number): Promise<boolean> {

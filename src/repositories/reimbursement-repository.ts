@@ -70,7 +70,7 @@ export class ReimbursementRepository {
       );
       return null;
     }
-    return data;
+    return data as Reimbursement;
   }
 
   async deleteReimbursement(requestId: number): Promise<boolean> {

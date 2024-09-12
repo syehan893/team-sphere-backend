@@ -54,7 +54,7 @@ export class DepartmentRepository {
       console.error("Error updating department:", error.message || error);
       return null;
     }
-    return data;
+    return data as Department;
   }
 
   async deleteDepartment(departmentId: string): Promise<boolean> {

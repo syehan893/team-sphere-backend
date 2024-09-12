@@ -54,7 +54,7 @@ export class NewsRepository {
       console.error("Error updating company news:", error.message || error);
       return null;
     }
-    return data;
+    return data as News;
   }
 
   async deleteNews(newsId: number): Promise<boolean> {
