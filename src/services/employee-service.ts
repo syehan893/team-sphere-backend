@@ -4,6 +4,9 @@ import { EmployeeRepository } from '../repositories/employee-repository';
 const employeeRepository = new EmployeeRepository();
 
 export class EmployeeService {
+  async getEmployeeByEmail(email: string): Promise<Employee | null> {
+    return await employeeRepository.getEmployeeByEmail(email);
+  }
   async createEmployee(employee: Employee): Promise<number | null> {
     return await employeeRepository.createEmployee(employee);
   }

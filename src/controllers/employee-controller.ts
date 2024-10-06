@@ -4,6 +4,17 @@ import { EmployeeService } from '../services/employee-service';
 
 const employeeService = new EmployeeService();
 
+export const getEmployeeByEmail = async (req: Request, res: Response): Promise<void> => {
+  const email = req.params.email as string;
+  const employee = await employeeService.getEmployeeByEmail(email);
+  if (employee) {
+    res.json(employee);
+  } else {
+    res.status(404).json({ message: 'Employee not found' });
+  }
+};
+
+
 export const createEmployee = async (req: Request, res: Response): Promise<void> => {
   const employee: Employee = req.body;
   const result = await employeeService.createEmployee(employee);

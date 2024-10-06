@@ -14,9 +14,9 @@ export const createEmployeeRollCall = async (req: Request, res: Response): Promi
   }
 };
 
-export const getEmployeeRollCallById = async (req: Request, res: Response): Promise<void> => {
-  const rollCallId = parseInt(req.params.id);
-  const employeeRollCall = await employeeRollCallService.getEmployeeRollCallById(rollCallId);
+export const getEmployeeRollCallByEid = async (req: Request, res: Response): Promise<void> => {
+  const employeeId = req.params.eid as String;
+  const employeeRollCall = await employeeRollCallService.getEmployeeRollCallByEid(employeeId);
   if (employeeRollCall) {
     res.json(employeeRollCall);
   } else {
@@ -24,8 +24,10 @@ export const getEmployeeRollCallById = async (req: Request, res: Response): Prom
   }
 };
 
-export const getAllEmployeeRollCalls = async (_req: Request, res: Response): Promise<void> => {
-  const employeeRollCalls = await employeeRollCallService.getAllEmployeeRollCalls();
+export const getAllEmployeeRollCalls = async (req: Request, res: Response): Promise<void> => {
+  const day = req.query.day as string | undefined;
+  const employeeRollCalls = await employeeRollCallService.getAllEmployeeRollCalls(day);
+  
   if (employeeRollCalls) {
     res.json(employeeRollCalls);
   } else {

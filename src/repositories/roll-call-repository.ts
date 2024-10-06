@@ -21,13 +21,13 @@ export class EmployeeRollCallRepository {
     return status;
   }
 
-  async getEmployeeRollCallById(
-    rollCallId: number
+  async getEmployeeRollCallByEid(
+    employeeId: String
   ): Promise<EmployeeRollCall | null> {
     const { data, error } = await supabase
       .from("employee_roll_call")
       .select("*")
-      .eq("roll_call_id", rollCallId)
+      .eq("employee_id", employeeId)
       .single();
 
     if (error) {
@@ -40,20 +40,46 @@ export class EmployeeRollCallRepository {
     return data;
   }
 
-  async getAllEmployeeRollCalls(): Promise<EmployeeRollCall[] | null> {
-    const { data, error } = await supabase
+  async getAllEmployeeRollCalls(day?: string): Promise<any[] | null> {
+    const query = supabase
       .from("employee_roll_call")
-      .select("*");
-
+      .select(`
+        roll_call_id,
+        employee_id,
+        date,
+        time_in,
+        status,
+        notes,
+        created_at,
+        updated_at,
+        employee:employee_id (
+          employee_id,
+          first_name,
+          last_name,
+          email,
+          phone_number,
+          hire_date,
+          job_title,
+          department_id,
+          manager_id,
+          created_at,
+          updated_at
+        )
+      `);
+  
+    if (day) {
+      query.eq("date", day);
+    }
+  
+    const { data, error } = await query;
+  
     if (error) {
-      console.error(
-        "Error fetching all employee roll calls:",
-        error.message || error
-      );
+      console.error("Error fetching employee roll calls:", error.message || error);
       return null;
     }
+  
     return data;
-  }
+  }  
 
   async updateEmployeeRollCall(
     rollCallId: number,

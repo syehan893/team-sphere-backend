@@ -1,7 +1,7 @@
 import express from 'express';
 import {
   createEmployeeRollCall,
-  getEmployeeRollCallById,
+  getEmployeeRollCallByEid,
   getAllEmployeeRollCalls,
   updateEmployeeRollCall,
   deleteEmployeeRollCall
@@ -11,7 +11,7 @@ import { authenticate } from '../middleware/auth-middleware';
 const router = express.Router();
 
 router.post('/', authenticate, createEmployeeRollCall);
-router.get('/:id', authenticate, getEmployeeRollCallById);
+router.get('/:eid', authenticate, getEmployeeRollCallByEid);
 router.get('/', authenticate, getAllEmployeeRollCalls); 
 router.put('/:id', authenticate, updateEmployeeRollCall);
 router.delete('/:id', authenticate, deleteEmployeeRollCall);

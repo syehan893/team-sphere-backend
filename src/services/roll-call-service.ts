@@ -8,12 +8,12 @@ export class EmployeeRollCallService {
     return await employeeRollCallRepository.createEmployeeRollCall(employeeRollCall);
   }
 
-  async getEmployeeRollCallById(rollCallId: number): Promise<EmployeeRollCall | null> {
-    return await employeeRollCallRepository.getEmployeeRollCallById(rollCallId);
+  async getEmployeeRollCallByEid(employeeId: String): Promise<EmployeeRollCall | null> {
+    return await employeeRollCallRepository.getEmployeeRollCallByEid(employeeId);
   }
 
-  async getAllEmployeeRollCalls(): Promise<EmployeeRollCall[] | null> {
-    return await employeeRollCallRepository.getAllEmployeeRollCalls();
+  async getAllEmployeeRollCalls(day?: string): Promise<any[] | null> {
+    return await employeeRollCallRepository.getAllEmployeeRollCalls(day);
   }
 
   async updateEmployeeRollCall(rollCallId: number, employeeRollCall: Partial<EmployeeRollCall>): Promise<EmployeeRollCall | null> {

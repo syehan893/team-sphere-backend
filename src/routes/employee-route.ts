@@ -4,12 +4,14 @@ import {
   getEmployeeById,
   getAllEmployees,
   updateEmployee,
-  deleteEmployee
+  deleteEmployee,
+  getEmployeeByEmail
 } from '../controllers/employee-controller';
 import { authenticate } from '../middleware/auth-middleware';
 
 const router = express.Router();
 
+router.get('/by-email/:email', authenticate, getEmployeeByEmail);
 router.post('/', authenticate, createEmployee);
 router.get('/:id', authenticate, getEmployeeById);
 router.get('/', authenticate, getAllEmployees); 
