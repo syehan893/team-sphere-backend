@@ -4,7 +4,7 @@ import { Leave } from "../models/leave";
 export class LeaveRepository {
   async createLeave(leaveRequest: Leave): Promise<number | null> {
     const { status, error } = await supabase
-      .from("leave_requests")
+      .from("leave_request")
       .insert(leaveRequest)
       .single();
 
@@ -18,7 +18,7 @@ export class LeaveRepository {
 
   async getLeaveById(requestId: number): Promise<Leave | null> {
     const { data, error } = await supabase
-      .from("leave_requests")
+      .from("leave_request")
       .select("*")
       .eq("request_id", requestId)
       .single();
@@ -31,7 +31,7 @@ export class LeaveRepository {
   }
 
   async getAllLeaves(): Promise<Leave[] | null> {
-    const { data, error } = await supabase.from("leave_requests").select("*");
+    const { data, error } = await supabase.from("leave_request").select("*");
 
     if (error) {
       console.error(
@@ -48,7 +48,7 @@ export class LeaveRepository {
     leaveRequest: Partial<Leave>
   ): Promise<Leave | null> {
     const { data, error } = await supabase
-      .from("leave_requests")
+      .from("leave_request")
       .update(leaveRequest)
       .eq("request_id", requestId)
       .single();
@@ -62,7 +62,7 @@ export class LeaveRepository {
 
   async deleteLeave(requestId: number): Promise<boolean> {
     const { error } = await supabase
-      .from("leave_requests")
+      .from("leave_request")
       .delete()
       .eq("request_id", requestId);
 
