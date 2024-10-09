@@ -4,6 +4,15 @@ import { ReimbursementRepository } from "../repositories/reimbursement-repositor
 const reimbursementRequestRepository = new ReimbursementRepository();
 
 export class ReimbursementService {
+
+  async getReimbursementsByEmployeeId(employeeId: string): Promise<Reimbursement[] | null> {
+    return await reimbursementRequestRepository.getReimbursementsByEmployeeId(employeeId);
+  }
+
+  async getReimbursementsByManagerId(managerId: string): Promise<Reimbursement[] | null> {
+    return await reimbursementRequestRepository.getReimbursementsByManagerId(managerId);
+  }
+  
   async createReimbursement(reimbursementRequest: Reimbursement): Promise<number | null> {
     return await reimbursementRequestRepository.createReimbursement(reimbursementRequest);
   }
@@ -16,7 +25,7 @@ export class ReimbursementService {
     return await reimbursementRequestRepository.getAllReimbursements();
   }
 
-  async updateReimbursement(requestId: number, reimbursementRequest: Partial<Reimbursement>): Promise<Reimbursement | null> {
+  async updateReimbursement(requestId: number, reimbursementRequest: Partial<Reimbursement>): Promise<number | null> {
     return await reimbursementRequestRepository.updateReimbursement(requestId, reimbursementRequest);
   }
 

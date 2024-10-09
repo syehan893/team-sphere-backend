@@ -25,7 +25,7 @@ export class Reimbursement {
       manager_id: string,
       created_at: Date = new Date(),
       updated_at: Date = new Date(),
-      currency: string = 'USD',
+      currency: string = 'IDR',
       description?: string,
       receipt_file_path?: string,
       manager_comment?: string

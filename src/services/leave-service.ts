@@ -4,6 +4,14 @@ import { LeaveRepository } from "../repositories/leave-repository";
 const leaveRequestRepository = new LeaveRepository();
 
 export class LeaveService {
+  
+  async getLeavesByEmployeeId(employeeId: string): Promise<Leave[] | null> {
+    return await leaveRequestRepository.getLeavesByEmployeeId(employeeId);
+  }
+
+  async getLeavesByManagerId(managerId: string): Promise<Leave[] | null> {
+    return await leaveRequestRepository.getLeavesByManagerId(managerId);
+  }
   async createLeave(leaveRequest: Leave): Promise<number | null> {
     return await leaveRequestRepository.createLeave(leaveRequest);
   }
@@ -16,7 +24,7 @@ export class LeaveService {
     return await leaveRequestRepository.getAllLeaves();
   }
 
-  async updateLeave(requestId: number, leaveRequest: Partial<Leave>): Promise<Leave | null> {
+  async updateLeave(requestId: number, leaveRequest: Partial<Leave>): Promise<number | null> {
     return await leaveRequestRepository.updateLeave(requestId, leaveRequest);
   }
 

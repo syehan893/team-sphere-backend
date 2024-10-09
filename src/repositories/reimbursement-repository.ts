@@ -2,6 +2,35 @@ import { supabase } from "../datasources/supabase-client";
 import { Reimbursement } from "../models/reimbursement";
 
 export class ReimbursementRepository {
+
+  async getReimbursementsByEmployeeId(employeeId: string): Promise<Reimbursement[] | null> {
+    const { data, error } = await supabase
+      .from("reimbursement_request")
+      .select("*")
+      .eq("employee_id", employeeId);
+
+    if (error) {
+      console.error("Error fetching reimbursements by employee ID:", error.message || error);
+      return null;
+    }
+
+    return data;
+  }
+
+  async getReimbursementsByManagerId(managerId: string): Promise<Reimbursement[] | null> {
+    const { data, error } = await supabase
+      .from("reimbursement_request")
+      .select("*")
+      .eq("manager_id", managerId);
+
+    if (error) {
+      console.error("Error fetching reimbursements by manager ID:", error.message || error);
+      return null;
+    }
+
+    return data;
+  }
+
   async createReimbursement(
     reimbursementRequest: Reimbursement
   ): Promise<number | null> {
@@ -56,8 +85,8 @@ export class ReimbursementRepository {
   async updateReimbursement(
     requestId: number,
     reimbursementRequest: Partial<Reimbursement>
-  ): Promise<Reimbursement | null> {
-    const { data, error } = await supabase
+  ): Promise<number | null> {
+    const { status, error } = await supabase
       .from("reimbursement_request")
       .update(reimbursementRequest)
       .eq("request_id", requestId)
@@ -70,7 +99,7 @@ export class ReimbursementRepository {
       );
       return null;
     }
-    return data as Reimbursement;
+    return status;
   }
 
   async deleteReimbursement(requestId: number): Promise<boolean> {

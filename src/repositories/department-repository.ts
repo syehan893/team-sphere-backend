@@ -20,7 +20,7 @@ export class DepartmentRepository {
     const { data, error } = await supabase
       .from("department")
       .select("*")
-      .eq("departement_id", departmentId)
+      .eq("department_id", departmentId)
       .single();
 
     if (error) {
@@ -47,7 +47,7 @@ export class DepartmentRepository {
     const { data, error } = await supabase
       .from("department")
       .update(department)
-      .eq("departement_id", departmentId)
+      .eq("deparement_id", departmentId)
       .single();
 
     if (error) {
@@ -61,7 +61,7 @@ export class DepartmentRepository {
     const { error } = await supabase
       .from("department")
       .delete()
-      .eq("departement_id", departmentId);
+      .eq("department_id", departmentId);
 
     if (error) {
       console.error("Error deleting department:", error.message || error);

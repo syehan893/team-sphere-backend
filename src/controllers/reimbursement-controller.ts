@@ -4,11 +4,31 @@ import { ReimbursementService } from '../services/reimbursement-service';
 
 const reimbursementRequestService = new ReimbursementService();
 
+export const getReimbursementsByEmployeeId = async (req: Request, res: Response): Promise<void> => {
+  const employeeId = req.params.employeeId;
+  const reimbursements = await reimbursementRequestService.getReimbursementsByEmployeeId(employeeId);
+  if (reimbursements) {
+    res.json(reimbursements);
+  } else {
+    res.status(404).json({ message: 'No reimbursements found for this employee' });
+  }
+};
+
+export const getReimbursementsByManagerId = async (req: Request, res: Response): Promise<void> => {
+  const managerId = req.params.managerId;
+  const reimbursements = await reimbursementRequestService.getReimbursementsByManagerId(managerId);
+  if (reimbursements) {
+    res.json(reimbursements);
+  } else {
+    res.status(404).json({ message: 'No reimbursements found for this manager' });
+  }
+};
+
 export const createReimbursement = async (req: Request, res: Response): Promise<void> => {
   const reimbursementRequest: Reimbursement = req.body;
   const result = await reimbursementRequestService.createReimbursement(reimbursementRequest);
   if (result === 201) {
-    res.status(201).json('success');
+    res.status(200).json('success');
   } else {
     res.status(400).json({ message: 'Error creating reimbursement request' });
   }
@@ -36,11 +56,11 @@ export const getAllReimbursements = async (_req: Request, res: Response): Promis
 export const updateReimbursement = async (req: Request, res: Response): Promise<void> => {
   const requestId = parseInt(req.params.id);
   const reimbursementRequest: Partial<Reimbursement> = req.body;
-  const updatedReimbursement = await reimbursementRequestService.updateReimbursement(requestId, reimbursementRequest);
-  if (updatedReimbursement) {
-    res.json(updatedReimbursement);
+  const result = await reimbursementRequestService.updateReimbursement(requestId, reimbursementRequest);
+  if (result === 204) {
+    res.status(200).json('success');
   } else {
-    res.status(400).json({ message: 'Error updating reimbursement request' });
+    res.status(400).json({ message:  'Error updating reimbursement request' });
   }
 };
 

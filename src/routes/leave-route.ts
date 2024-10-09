@@ -4,7 +4,9 @@ import {
   getLeaveById,
   getAllLeaves,
   updateLeave,
-  deleteLeave
+  deleteLeave,
+  getLeavesByEmployeeId,
+  getLeavesByManagerId
 } from '../controllers/leave-controller';
 import { authenticate } from '../middleware/auth-middleware';
 
@@ -15,5 +17,7 @@ router.get('/:id', authenticate, getLeaveById);
 router.get('/', authenticate, getAllLeaves);
 router.put('/:id', authenticate, updateLeave);
 router.delete('/:id', authenticate, deleteLeave);
+router.get('/employee/:employeeId', authenticate, getLeavesByEmployeeId);
+router.get('/manager/:managerId', authenticate, getLeavesByManagerId);
 
 export default router;
