@@ -1,7 +1,7 @@
 import { Employee } from './employee';
 
 export class Reimbursement {
-  request_id: string;
+  request_id: number;
   employee_id: string;
   request_date: Date;
   expense_date: Date;
@@ -18,7 +18,7 @@ export class Reimbursement {
   employee?: Employee;
 
   constructor(
-    request_id: string,
+    request_id: number,
     employee_id: string,
     request_date: Date,
     expense_date: Date,
