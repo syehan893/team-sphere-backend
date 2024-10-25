@@ -1,4 +1,5 @@
 import { supabase } from '../datasources/supabase-client';
+import { Employee } from '../models/employee';
 import { Leave } from '../models/leave';
 
 export class LeaveRepository {
@@ -19,10 +20,29 @@ export class LeaveRepository {
     return data;
   }
 
-  async getLeavesByManagerId(managerId: string): Promise<Leave[] | null> {
+  async getLeavesByManagerId(
+    managerId: string,
+  ): Promise<(Leave & { employee: Employee })[] | null> {
     const { data, error } = await supabase
       .from('leave_request')
-      .select('*')
+      .select(
+        `
+        *,
+        employee:employee_id (
+          employee_id,
+          first_name,
+          last_name,
+          email,
+          phone_number,
+          hire_date,
+          job_title,
+          department_id,
+          manager_id,
+          created_at,
+          updated_at
+        )
+      `,
+      )
       .eq('manager_id', managerId);
 
     if (error) {
@@ -35,6 +55,7 @@ export class LeaveRepository {
 
     return data;
   }
+
   async createLeave(leaveRequest: Leave): Promise<number | null> {
     const { status, error } = await supabase
       .from('leave_request')

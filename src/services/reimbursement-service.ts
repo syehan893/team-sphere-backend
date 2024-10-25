@@ -1,3 +1,4 @@
+import { Employee } from "../models/employee";
 import { Reimbursement } from "../models/reimbursement";
 import { ReimbursementRepository } from "../repositories/reimbursement-repository";
 
@@ -9,7 +10,7 @@ export class ReimbursementService {
     return await reimbursementRequestRepository.getReimbursementsByEmployeeId(employeeId);
   }
 
-  async getReimbursementsByManagerId(managerId: string): Promise<Reimbursement[] | null> {
+  async getReimbursementsByManagerId(managerId: string): Promise<(Reimbursement & { employee: Employee })[] | null> {
     return await reimbursementRequestRepository.getReimbursementsByManagerId(managerId);
   }
   

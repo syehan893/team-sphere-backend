@@ -1,3 +1,4 @@
+import { Employee } from "../models/employee";
 import { Leave } from "../models/leave";
 import { LeaveRepository } from "../repositories/leave-repository";
 
@@ -9,7 +10,7 @@ export class LeaveService {
     return await leaveRequestRepository.getLeavesByEmployeeId(employeeId);
   }
 
-  async getLeavesByManagerId(managerId: string): Promise<Leave[] | null> {
+  async getLeavesByManagerId(managerId: string): Promise<(Leave & { employee: Employee })[] | null> {
     return await leaveRequestRepository.getLeavesByManagerId(managerId);
   }
   async createLeave(leaveRequest: Leave): Promise<number | null> {

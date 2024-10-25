@@ -17,6 +17,7 @@ export const getLeavesByEmployeeId = async (req: Request, res: Response): Promis
 export const getLeavesByManagerId = async (req: Request, res: Response): Promise<void> => {
   const managerId = req.params.managerId;
   const leaves = await leaveRequestService.getLeavesByManagerId(managerId);
+  
   if (leaves) {
     res.json(leaves);
   } else {
