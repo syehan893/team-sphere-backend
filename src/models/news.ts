@@ -8,8 +8,8 @@ export class News {
   importance: string;
   attachment_url?: string;
   is_published: boolean;
-  created_at: Date;
-  updated_at: Date;
+  created_at?: Date;
+  updated_at?: Date;
 
   constructor(
     news_id: number,

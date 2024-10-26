@@ -11,8 +11,8 @@ export class Leave {
   status: string;
   manager_id: string;
   manager_comment: string;
-  created_at: Date;
-  updated_at: Date;
+  created_at?: Date;
+  updated_at?: Date;
   employee?: Employee;
   constructor(
     request_id: number,

@@ -1,5 +1,4 @@
 export class Department {
-    d_id: number;
     department_id: string;
     department_name: string;
     department_code: string;
@@ -7,11 +6,10 @@ export class Department {
     parent_department_id?: string;
     manager_id?: string;
     description?: string;
-    created_at: Date;
-    updated_at: Date;
+    created_at?: Date;
+    updated_at?: Date;
   
     constructor(
-      d_id: number,
       department_id: string,
       department_name: string,
       department_code: string,
@@ -22,7 +20,6 @@ export class Department {
       manager_id?: string,
       description?: string
     ) {
-      this.d_id = d_id;
       this.department_id = department_id;
       this.department_name = department_name;
       this.department_code = department_code;

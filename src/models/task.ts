@@ -9,8 +9,8 @@ export class Task {
   status: string;
   completion_date?: Date;
   comments?: string;
-  created_at: Date;
-  updated_at: Date;
+  created_at?: Date;
+  updated_at?: Date;
 
   constructor(
     task_id: number,

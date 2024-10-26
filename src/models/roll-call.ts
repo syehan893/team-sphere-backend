@@ -5,8 +5,8 @@ export class EmployeeRollCall {
     time_in?: Date;
     status: string;
     notes?: string;
-    created_at: Date;
-    updated_at: Date;
+    created_at?: Date;
+    updated_at?: Date;
   
     constructor(
       roll_call_id: number,
