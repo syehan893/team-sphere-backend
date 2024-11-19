@@ -60,18 +60,19 @@ export class EmployeeRepository {
   async updateEmployee(
     employeeId: string,
     employee: Partial<Employee>,
-  ): Promise<Employee | null> {
-    const { data, error } = await supabase
+  ): Promise<number | null> {
+    const { status, error } = await supabase
       .from('employee')
       .update(employee)
       .eq('employee_id', employeeId)
       .single();
 
     if (error) {
-      console.error('Error updating employee:', error.message || error);
+      console.error('Error creating employee request:', error.message || error);
       return null;
     }
-    return data as Employee;
+
+    return status;
   }
 
   async deleteEmployee(employeeId: string): Promise<boolean> {

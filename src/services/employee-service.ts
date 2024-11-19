@@ -19,7 +19,7 @@ export class EmployeeService {
     return await employeeRepository.getAllEmployees();
   }
 
-  async updateEmployee(employeeId: string, employee: Partial<Employee>): Promise<Employee | null> {
+  async updateEmployee(employeeId: string, employee: Partial<Employee>): Promise<number | null> {
     return await employeeRepository.updateEmployee(employeeId, employee);
   }
 

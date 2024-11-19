@@ -45,13 +45,13 @@ export const getAllEmployees = async (_req: Request, res: Response): Promise<voi
 };
 
 export const updateEmployee = async (req: Request, res: Response): Promise<void> => {
-  const employeeId = req.params.id;
+  const employeeId = req.params.id as string;
   const employee: Partial<Employee> = req.body;
-  const updatedEmployee = await employeeService.updateEmployee(employeeId, employee);
-  if (updatedEmployee) {
-    res.json(updatedEmployee);
+  const result = await employeeService.updateEmployee(employeeId, employee);
+  if (result === 204) {
+    res.status(200).json('success');
   } else {
-    res.status(400).json({ message: 'Error updating employee' });
+    res.status(400).json({ message: 'Error creating employee request' });
   }
 };
 
